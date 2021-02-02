@@ -25,7 +25,7 @@ class XASession:
         print("Session disconnected")
         XASession.login_state = 0
 
-class Ebest:
+class EBest:
 
     def __init__(self, mode=None):
         """
