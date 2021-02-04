@@ -29,6 +29,6 @@ class TestEBest(unittest.TestCase):
 
     def test_get_stock_price_list_by_code(self):
         print(inspect.stack()[0][3])
-        result = self.ebest.get_stock_price_by_code("000020", "1")
+        result = self.ebest.get_stock_price_by_code("005930", "2")
         assert result is not None
         print(result)
