@@ -55,8 +55,9 @@ class EBest:
         self.account = config[run_mode]['account']
 
         self.xa_session_client = win32com.client.DispatchWithEvents("XA_Session.XASession", XASession)
+        self.query_cnt = []
 
-    def _excute_query(self, res, in_block_name, out_block_name, *out_fields, **set_fields):
+    def _execute_query(self, res, in_block_name, out_block_name, *out_fields, **set_fields):
         """
         TR 코드를 실행하기 위한 메서드입니다.
         :param res: str 리소스 이름(TR)
@@ -109,7 +110,7 @@ class EBest:
         for item in result:
             for field in list(item.keys()):
                 if getattr(Field, res, None):
-                    res_field = getattr((Field, res, None))
+                    res_field = getattr(Field, res, None)
                     if out_block_name in res_field:
                         field_hname = res_field[out_block_name]
                         if field in field_hname:
