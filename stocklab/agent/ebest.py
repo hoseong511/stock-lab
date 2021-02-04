@@ -212,6 +212,29 @@ class EBest:
 
         return result
 
+    def get_short_trend_by_code(self, code=None, sdate=None, edate=None):
+        """
+        TR: t1927 공매도일별추이
+        :param code: str 종목코드
+        :param sdate: str 시작일자
+        :param edate: str 종료일자
+        :return: list 시장 별 종목 리스트
+        """
+        in_params = {"date":sdate, "sdate":sdate, "edate":edate, "shcode":code}
+        out_params = ["date", "price", "sign", "change", "diff", "volume", "value",
+                      "gm_vo", "gm_va", "gm_per", "gm_avg", "gm_vo_sum"]
+
+        result = self._execute_query("t1927",
+                                     "t1927InBlock",
+                                     "t1927OutBlock1",
+                                     *out_params,
+                                     **in_params)
+
+        for item in result:
+            item["code"]=code
+
+        return result
+
 
     def login(self):
         self.xa_session_client.ConnectServer(self.host, self.port)
