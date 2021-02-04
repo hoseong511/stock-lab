@@ -154,7 +154,7 @@ class EBest:
                       'l_diff', 'marketcap']
         result = self._execute_query("t1305",
                                      "t1305InBlock",
-                                     "t1305OutBlock",
+                                     "t1305OutBlock1",
                                      *out_params,
                                      **in_params)
         for item in result:
