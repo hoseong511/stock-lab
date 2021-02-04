@@ -137,7 +137,6 @@ class EBest:
                                      **in_params)
         return result
 
-
     def login(self):
         self.xa_session_client.ConnectServer(self.host, self.port)
         self.xa_session_client.Login(self.user, self.passwd, self.cert_passwd, 0, 0)
