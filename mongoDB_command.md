@@ -3,7 +3,7 @@ MongoDB의 명령어 연습
 insert, update, find, delete
 ```
 use stocklab # DB 접속   
-show collections # 콜렉션 검색 -> sql로 하면 테이블인듯함.
+show collections # 콜렉션 검색 -> sql에서의 테이블인듯함.
 
 db.price_info.insertOne({"code":"1", "name":"SAMSUNG","price":123,"time":new Timestamp()}) #insertOne 테스트   
 db.price_info.insertMany([{"code": "2", "name": "LG", "price":234, "time" : new Timestamp() } , {"code":"3", "name": "SK", "price": 345, "time" : new Timestamp() } ]) # insertMany 테스트
