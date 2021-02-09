@@ -96,5 +96,27 @@ class Crawler:
     def get_side(self):
         soup = BeautifulSoup(self.html_table, 'html.parser')
         print("table", soup.table)
+        print("thead th", soup.thead.find_all(scope=re.compile("col")))
+        # thead th [<th scope="col">컬럼1</th>, <th scope="col">컬럼2</th>]
+        col_list = [ col.string for col in soup.thead.find_all(scope=re.compile("col")) ]
+        print(col_list)
+        #['컬럼1','컬럼2']
+        tr_list = soup.tbody.find_all("tr")
+        print("tr list", tr_list)
+
+        for tr in tr_list:
+            for td in tr.find_all("td"):
+                print("tr dt", td.string)
+        """
+        tr td 항목1값1
+        tr td 항목1값2
+        tr td 항목2값1
+        tr td 항목2값2
+        """
+
+if __name__ == "__main__":
+    crawler = Crawler()
+    crawler.get_news_section()
+    crawler.get_side()
 
 
