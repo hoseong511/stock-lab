@@ -3,9 +3,9 @@ import configparser
 import xml.etree.ElementTree as ET
 
 class Data():
-    CORP_CODE_URL = "http://api.seibro.or.kr/openapi/service/CorpSvc/getIssucoCustnobyNm"
+    CORP_CODE_URL = "http://api.seibro.or.kr/openapi/service/CorpSvc/getIssucoCustnoByNm"
     CORP_INFO_URL = "http://api.seibro.or.kr/openapi/service/CorpSvc/getIssucoBasicInfo"
-    STOCK_DISTRIBUTION_URL = "http://api.seibro.or.kr/openapi/service/CorpSvc/getStkDistriubutionStatus"
+    STOCK_DISTRIBUTION_URL = "http://api.seibro.or.kr/openapi/service/CorpSvc/getStkDistributionStatus"
 
     def __init__(self):
         config = configparser.RawConfigParser()
@@ -61,7 +61,7 @@ class Data():
             result["ceoNm"] = item.find('ceoNm').text
             result["engCustNm"] = item.find('engCustNm').text
             result["foundDt"] = item.find('founDt').text
-            result["homepAddr"] = item.find('homepaAddr').text
+            result["homepAddr"] = item.find('homepAddr').text
             result["pval"] = item.find('pval').text
             result["totalStkcnt"] = item.find('totalStkCnt').text
 
