@@ -79,8 +79,63 @@ class MongoDBHandler:
     def delete_items(self, condition=None, db_name=None, collection_name=None):
         """
         여러 개의 문서를 삭제하기 위한 메서드
-        :param condition:
+        :paramcondition:dict 삭제 조건을 딕셔너리 형태로 받는다.
+        :param db_name:str 데이터베이스에 해당하는 이름을 받는다.
+        :param collection_name:str 데이터베이스에 속하는 컬렉션 이름을 받는다
+        :return: obj PyMongo의 문서 삭제 결과 객체인 DeleteResult가 반환된다.
+        :raises Exception: 매개변수 db_name과 collection_name 이 없으면 예외를 발생
+        """
+        if condition is None or not isinstance(condition, dict):
+            raise Exception("Need to condition")
+        if db_name is None or collection_name is None:
+            raise Exception("Need to param db_name, collection_name")
+        return self._client[db_name][collection_name].delete_many(condition)
+
+    def update_item(self, condition=None, update_value=None, db_name=None, collection_name=None, upsert=True):
+        """
+        하나의 문서를 갱신하기 위한 메서드
+        :param condition: dict 갱신 조건을 딕셔너리 형태로 받는다.
+        :param update_value: 갱신하고자 하는 값을 딕셔너리 형태롤 받는다
+        :param db_name: 데이터베이스 이름을 받는다
+        :param collection_name: 컬렉션이름을 받는다
+        :param upsert:
+        :return: obj PyMong의 문서 갱신 결과 객체인 UpdateResult가 반환
+        :raises Exception: 매개변수 db_name과 collection_name이 없으면 예외를 발생
+        """
+        if condition is None or not isinstance(condition, dict):
+            raise Exception("Need to condition")
+        if update_value is None:
+            raise Exception("Need to update value")
+        if db_name is None or collection_name is None:
+            raise Exception("Need to param db_name, collection_name")
+        return self._client[db_name][collection_name].update_many(filter=condition, update=update_value)
+
+    def aggreate(self, pipeline=None, db_name=None, collection_name=None):
+        """
+        aggregate 작업을 위한 메서드
+        :param pipeline: list 갱신 조건을 딕셔너리의 리스트 형태로 받는다.
+        :param db_name: str 데이터베이스 이름을 받는다
+        :param collection: str 컬렉션의 이름을 받는다
+        :return: obj CommandCursor가 반환
+        :raises Exception: 매개변수 db_name과 collection_name이 없으면 예외를 발생
+        """
+        if pipeline is None or not isinstance(pipeline, list):
+            raise Exception("Need to pipeline")
+        if db_name is None or collection_name is None:
+            raise Exception("Need to db_name, collection_name")
+        return self._client[db_name][collection_name].aggregate(pipeline)
+
+    def text_search(self, text=None, db_name=None, collection_name=None):
+        """
+
+        :param text:
         :param db_name:
         :param collection_name:
         :return:
         """
+        if text is None or not isinstance(text, str):
+            raise Exception("Need to text")
+        if db_name is None or collection_name is None:
+            raise Exception("Need to param db_name, collection_name")
+        return self._client[db_name][collection_name].find({"$text": {"$search": text}})
+
