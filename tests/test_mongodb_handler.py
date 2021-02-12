@@ -42,3 +42,48 @@ class MongoDBHandlerTestCase(unittest.TestCase):
         ids = self.mongodb.insrt_items(docs, "stocklab_test", "corp_info")
         assert ids
         print(ids)
+
+    def test_find_item(self):
+        print(inspect.stack()[0][3])
+        doc = self.mongodb.find_item({"related": "LG"}, "stocklab_test", "corp_info")
+        pprint(doc)
+
+    def test_find_items(self):
+        print(inspect.stock()[0][3])
+        cursor = self.mongodb.find_items({"tags.1": "red"}, "stocklab_test", "corp_info")
+        assert cursor
+        for doc in cursor:
+            pprint(doc)
+
+    def test_delete_items(self):
+        print(inspect.stack()[0][3])
+        result = self.mongodb.delete_items({"related": "SamSung"}, "stocklab_test", "corp_info")
+        assert result
+        print(result.deleted_count)
+
+    def test_update_items(self):
+        print(inspect.stack()[0][3])
+        result = self.mongodb.update_items({"item": "LG Telecom"}, {"$set": {"qty":300}}, "stocklab_test", "corp_info")
+        assert result
+        print("matched_count: " + str(result.matched_count))
+        print("modified_count: " + str(result.modified_count))
+
+    def test_aggregate(self):
+        print(inspect.stack()[0][3])
+        pipeline = [
+            { "$match": {"tags.1": "red"} }, { "$group": {"_id":"$related", "sum_val":{"$sum":"$qty"}}}
+        ]
+        result = self.mongodb.aggreate(pipeline, "stocklab_test", "corp_info")
+        assert result
+        for item in result:
+            pprint(item)
+    def test_text_search(self):
+        print(inspect.stack()[0][3])
+        index_result = self.mongodb._client["stocklab_test"]["corp_info"].create_index([('item', 'text'),
+                                                                                        ('related', 'text'),
+                                                                                        ('tags', 'text')])
+        print(index_result)
+        result = self.mongodb.text_search("black", "stocklab_test", "corp_info")
+        assert result
+        for item in result:
+            pprint(item)

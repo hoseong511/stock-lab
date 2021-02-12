@@ -108,6 +108,25 @@ class MongoDBHandler:
             raise Exception("Need to update value")
         if db_name is None or collection_name is None:
             raise Exception("Need to param db_name, collection_name")
+        return self._client[db_name][collection_name].update_one(filter=condition, update=update_value, upsert=True)
+
+    def update_items(self, condition=None, update_value=None, db_name=None, collection_name=None, upsert=True):
+        """
+        여러 개 문서를 갱신하기 위한 메서드
+        :param condition: dict 갱신 조건을 딕셔너리 형태로 받는다.
+        :param update_value: 갱신하고자 하는 값을 딕셔너리 형태롤 받는다
+        :param db_name: 데이터베이스 이름을 받는다
+        :param collection_name: 컬렉션이름을 받는다
+        :param upsert:
+        :return: obj PyMongo의 문서 갱신 결과 객체인 UpdateResult가 반환
+        :raises Exception: 매개변수 db_name과 collection_name이 없으면 예외를 발생
+        """
+        if condition is None or not isinstance(condition, dict):
+            raise Exception("Need to condition")
+        if update_value is None:
+            raise Exception("Need to update value")
+        if db_name is None or collection_name is None:
+            raise Exception("Need to param db_name, collection_name")
         return self._client[db_name][collection_name].update_many(filter=condition, update=update_value)
 
     def aggreate(self, pipeline=None, db_name=None, collection_name=None):
