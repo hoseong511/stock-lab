@@ -27,7 +27,6 @@ def collect_stock_info():
             print(result_price)
             mongodb.insert_items(result_price, "stocklab", "price_info")
 
-
 if __name__ == '__main__':
     collect_code_list()
     collect_stock_info()
