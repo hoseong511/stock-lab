@@ -20,3 +20,20 @@ db.price_info.deleteOne( { code: "3" } ) # code가 3인 문서 1개를 삭제
 db.price_info.deleteMany( { "price": 111 } ) # price가 123인 문서 여러 개를 삭제
 
 ```
+```
+db.corp_info.insertMany([
+    { item: "SamSung SDS", related:"SamSung", qty: 25, tags: ["blank", "red"], accout: [14, 21]},
+    { item: "LG CNS", related:"LG", qty: 50, tags: ["red", "blank"], accout: [14, 21]},
+    { item: "SK Telecom", related:"SK", qty: 100, tags: ["red", "blank", "plain"], accout: [14, 21]},
+    { item: "HYUNDAI MOBIS", related:"HYUNDAI", qty: 75, tags: ["blank", "red"], accout: [22.85, 30]},
+    { item: "SamSung SDI", related:"SamSung", qty: 25, tags: ["blank", "red"], accout: [14, 21]},
+    { item: "LG Telecom", related:"LG", qty: 50, tags: ["red", "blank"], accout: [14, 21]},
+    { item: "SK Innovation", related:"SK", qty: 50, tags: ["red", "blank"], accout: [14, 21]}
+    ]}
+db.corp_info.find({ tags: ["red", "blank"] })
+db.corp_info.find({ tags: "red" })
+db.corp_info.find({ account: {$gt: 15, $lt: 20}})
+db.corp_info.find({ account: {
+    
+
+```
