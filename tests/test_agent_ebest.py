@@ -51,4 +51,3 @@ class TestEBest(unittest.TestCase):
         assert result is not None
         print(result)
 
-    def
