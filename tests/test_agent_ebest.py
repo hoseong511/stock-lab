@@ -50,4 +50,5 @@ class TestEBest(unittest.TestCase):
         result = self.ebest.get_agent_trend_by_code("005930", fromdt="20200205", todt="20210204")
         assert result is not None
         print(result)
+        print("test")
 
