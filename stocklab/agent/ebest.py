@@ -57,6 +57,21 @@ class EBest:
         self.xa_session_client = win32com.client.DispatchWithEvents("XA_Session.XASession", XASession)
         self.query_cnt = []
 
+    def get_account_info(self):
+        """
+        TR: CSPAQ12200 현물계좌 예수금/주문가능금액/총평가
+        :return: list Field CSPAQ12200 참고
+        """
+        in_params = {"RecCnt":1, "AcntNo": self.account, "Pwd": self.passwd}
+        out_params = {"MnyOrdAbleAmt", "BalEvalAmt", "DpsastTotamt", "InvstOrgAmt", "InvstPlAmt",
+                      "Dps"}
+        result = self._execute_query("CSPAQ12200",
+                                     "CSPAQ12200InBlock1",
+                                     "CSPAQ12200OutBlock2",
+                                     *out_params,
+                                     **in_params)
+        return result
+
     def _execute_query(self, res, in_block_name, out_block_name, *out_fields, **set_fields):
         """
         TR 코드를 실행하기 위한 메서드입니다.
