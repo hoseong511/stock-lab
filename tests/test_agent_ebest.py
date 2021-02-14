@@ -32,23 +32,28 @@ class TestEBest(unittest.TestCase):
     #     result = self.ebest.get_stock_price_by_code("005930", "2")
     #     assert result is not None
     #     print(result)
+    #
+    # def test_get_credit_trend_by_code(self):
+    #     print(inspect.stack()[0][3])
+    #     result = self.ebest.get_credit_trend_by_code("005930", "20210204")
+    #     assert result is not None
+    #     print(result)
+    #
+    # def test_get_short_trend_by_code(self):
+    #     print(inspect.stack()[0][3])
+    #     result = self.ebest.get_short_trend_by_code("005930", sdate="20200205", edate="20210204")
+    #     assert result is not None
+    #     print(result)
+    #
+    # def test_get_agent_trend_by_code(self):
+    #     print(inspect.stack()[0][3])
+    #     result = self.ebest.get_agent_trend_by_code("005930", fromdt="20200205", todt="20210204")
+    #     assert result is not None
+    #     print(result)
+    #     print("test")
 
-    def test_get_credit_trend_by_code(self):
-        print(inspect.stack()[0][3])
-        result = self.ebest.get_credit_trend_by_code("005930", "20210204")
+    def test_get_account_info(self):
+        result = self.ebest.get_account_info()
         assert result is not None
         print(result)
-
-    def test_get_short_trend_by_code(self):
-        print(inspect.stack()[0][3])
-        result = self.ebest.get_short_trend_by_code("005930", sdate="20200205", edate="20210204")
-        assert result is not None
-        print(result)
-
-    def test_get_agent_trend_by_code(self):
-        print(inspect.stack()[0][3])
-        result = self.ebest.get_agent_trend_by_code("005930", fromdt="20200205", todt="20210204")
-        assert result is not None
-        print(result)
-        print("test")
 
