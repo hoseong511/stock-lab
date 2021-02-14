@@ -275,6 +275,17 @@ class XAQuery:
         print("OnreceiveMessage", error, code, message)
 
 class Field:
+
+    CSPAQ12200 = {
+        "CSPAQ12200OutBlock2": {
+            "MnyOrdAbleAmt": "현금주문가능금액",
+            "BalEvalAmt":"잔고평가금액",
+            "InvstOrgAmt":"투자원금",
+            "InvstPlAmt":"투자손익금액",
+            "Dps":"예수금"
+        }
+    }
+
     t1101 = {
         "t1101OutBlock":{
             "hname":"한글명",
