@@ -111,6 +111,27 @@ class EBest:
                                      **in_params)
         return result
 
+    def order_cancel(self, order_no, code, qty):
+        """
+        TR: CSPAT00800 현물 취소주문
+        :param order_no:str 주문번호
+        :param code: str 종목코드
+        :param qty: str 취소 수량
+        :return: dict 취소 결과
+        """
+        in_params = {"OrgOrdNo":order_no, "AcntNo": self.account, "InptPwd":self.passwd,
+                     "IsuNo":code, "OrdQty":qty}
+        out_params = ["OrdNo", "PrntOrdNo", "OrdTime", "OrdPtnCode", "IsuNm"]
+        result = self._execute_query("CSPAT00800",
+                                     "CSPAT00800InBlock1",
+                                     "CSPAT00800OutBlock2",
+                                     *out_params,
+                                     **in_params)
+
+        return result
+
+
+
 
 
     def _execute_query(self, res, in_block_name, out_block_name, *out_fields, **set_fields):
