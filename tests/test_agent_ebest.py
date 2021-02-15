@@ -62,3 +62,9 @@ class TestEBest(unittest.TestCase):
         assert result is not None
         print(result)
 
+    def test_order_stock(self):
+        print(inspect.stack()[0][3])
+        result = self.ebest.order_stock("005930","2","50000", "2", "00")
+        assert result
+        print(result)
+
