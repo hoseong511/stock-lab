@@ -57,3 +57,8 @@ class TestEBest(unittest.TestCase):
         assert result is not None
         print(result)
 
+    def test_get_account_stock_info(self):
+        result = self.ebest.get_account_stock_info()
+        assert result is not None
+        print(result)
+

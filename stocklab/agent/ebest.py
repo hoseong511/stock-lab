@@ -86,6 +86,7 @@ class EBest:
                                      *out_params,
                                      **in_params)
         return result
+
     def _execute_query(self, res, in_block_name, out_block_name, *out_fields, **set_fields):
         """
         TR 코드를 실행하기 위한 메서드입니다.
