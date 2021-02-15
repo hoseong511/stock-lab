@@ -72,6 +72,20 @@ class EBest:
                                      **in_params)
         return result
 
+    def get_account_stock_info(self):
+        """
+        TR: CSPAQ12300 현물계좌 잔고내역 조회
+        :return: result: list 계좌 보유 종목 정보
+        """
+        in_params = {"ReCnt": 1, "AcntNo": self.account, "Pwd": self.passwd, "BalCreTp": "0",
+                     "CmsnAppTpCode": "0", "D2balBaseQryTp": "0", "UprcTpCode": "0"}
+        out_params = ["isuNo", "IsuNm", "BalQty", " SellPrc", "BuyPrc", "NowPrc", "AvrUprc", "BalEvalAmt", "PrdayCprc"]
+        result = self._execute_query("CSPAQ12300",
+                                     "CSPAQ12300InBlock1",
+                                     "CSPAQ12300OutBlock3",
+                                     *out_params,
+                                     **in_params)
+        return result
     def _execute_query(self, res, in_block_name, out_block_name, *out_fields, **set_fields):
         """
         TR 코드를 실행하기 위한 메서드입니다.
@@ -279,7 +293,7 @@ class Field:
     CSPAQ12200 = {
         "CSPAQ12200OutBlock2": {
             "MnyOrdAbleAmt": "현금주문가능금액",
-            "BalEvalAmt":"잔고평가금액",
+            "BalEvalmt":"잔고평가금액",
             "InvstOrgAmt":"투자원금",
             "InvstPlAmt":"투자손익금액",
             "Dps":"예수금"
