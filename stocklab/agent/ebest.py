@@ -87,6 +87,30 @@ class EBest:
                                      **in_params)
         return result
 
+    def order_stock(self, code, qty, price, bns_type, order_type):
+        """
+        TR: CSPAT00600 현물 정상 주문
+        :param code:
+        :param qty:
+        :param price:
+        :param bns_type: str 매매타입, 1: 매도, 2: 매수
+        :param order_type: str 호가유형,
+            00: 지정가, 03:시장가, 05:조건부지정가, 07:최우선지정가
+            61: 장개시전시간외 종가, 81: 시간외종가, 82:시간외단일가
+        :return: dict 주문관련정보
+        """
+        in_params = {"AcntNo": self.account, "InpuPwd":self.passwd, "IsuNo":code, "OrdQty":qty,
+                     "OrdPrc":price, "BnsTpCode":bns_type, "OrdprcPtnCode":order_type,
+                     "MgntrnCode":"000", "LoanDt":"", "OrdCndiTpCode":"0"}
+        out_params = ["OrdNo", "OrdTime", "OrdMktCode", "OrdPtnCode", "ShtnIsuNo", "MgempNo",
+                      "OrdAmt", "SpotOrdQty", "IsuNm"]
+        result = self._execute_query("CSPAT00600",
+                                     "CSPAT00600InBlock1",
+                                     "CSPAT00600OutBlock2",
+                                     *out_params,
+                                     **in_params)
+        return result
+
     def _execute_query(self, res, in_block_name, out_block_name, *out_fields, **set_fields):
         """
         TR 코드를 실행하기 위한 메서드입니다.
