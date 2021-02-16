@@ -16,6 +16,7 @@ class MongoDBHandler:
 
         self._client = MongoClient(host, int(port))
 
+
     def insert_item(self, data, db_name=None, collection_name=None):
         """
         MongoDB에 하나의 문서(document)를 입력하기 위한 메서드다.

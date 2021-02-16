@@ -392,11 +392,6 @@ class EBest:
         elif price >= 100000 and price < 500000: return 500
         elif price >= 500000: return 1000
 
-
-
-
-
-
 class XAQuery:
     RES_PATH = "C:\\eBEST\\xingAPI\\Res\\"
     tr_run_state=0
