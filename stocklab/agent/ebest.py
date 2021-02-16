@@ -395,6 +395,8 @@ class EBest:
 
 
 
+
+
 class XAQuery:
     RES_PATH = "C:\\eBEST\\xingAPI\\Res\\"
     tr_run_state=0
