@@ -47,7 +47,7 @@ class MongoDBHandler:
             raise Exception("Need to param db_name, collection_name")
         return self._client[db_name][collection_name].insert_many(datas).inserted_ids
 
-    def find_item(self, conditon=None, db_name=None, collection_name=None):
+    def find_item(self, condition=None, db_name=None, collection_name=None):
         """
         하나의 문서(document)를 검색하기 위한 메서드
         :param conditon: dict 검색 조건을 딕셔너리 형태로 받는다.
@@ -56,7 +56,7 @@ class MongoDBHandler:
         :return: 검색된 문서가 있으면 문서의 내용을 반환
         :raise Exception: 매개변수 db_name과 collection_name이 없으면 예외를 발생
         """
-        if conditon is None or not isinstance(conditon, dict):
+        if condition is None or not isinstance(condition, dict):
             condition = {}
         if db_name is None or collection_name is None:
             raise Exception("Need to param db_name, collection_name")

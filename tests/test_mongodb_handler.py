@@ -39,7 +39,7 @@ class MongoDBHandlerTestCase(unittest.TestCase):
         docs = [ {"item": "LG", "related": "LG", "qty": 25, "tags": ["red"], "account": [14, 21]},
                  {"item": "LG 화학", "related": "LG", "qty": 25, "tags": ["green", "red"], "account": [14, 21]}
         ]
-        ids = self.mongodb.insrt_items(docs, "stocklab_test", "corp_info")
+        ids = self.mongodb.insert_items(docs, "stocklab_test", "corp_info")
         assert ids
         print(ids)
 
@@ -49,7 +49,7 @@ class MongoDBHandlerTestCase(unittest.TestCase):
         pprint(doc)
 
     def test_find_items(self):
-        print(inspect.stock()[0][3])
+        print(inspect.stack()[0][3])
         cursor = self.mongodb.find_items({"tags.1": "red"}, "stocklab_test", "corp_info")
         assert cursor
         for doc in cursor:
