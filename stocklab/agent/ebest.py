@@ -267,9 +267,9 @@ class EBest:
         TR: CSPAQ12300 현물계좌 잔고내역 조회
         :return: result: list 계좌 보유 종목 정보
         """
-        in_params = {"ReCnt": 1, "AcntNo": self.account, "Pwd": self.passwd, "BalCreTp": "0",
+        in_params = {"RecCnt": 1, "AcntNo": self.account, "Pwd": self.passwd, "BalCreTp": "0",
                      "CmsnAppTpCode": "0", "D2balBaseQryTp": "0", "UprcTpCode": "0"}
-        out_params = ["isuNo", "IsuNm", "BalQty", " SellPrc", "BuyPrc", "NowPrc", "AvrUprc", "BalEvalAmt", "PrdayCprc"]
+        out_params = ["IsuNo", "IsuNm", "BalQty", " SellPrc", "BuyPrc", "NowPrc", "AvrUprc", "BalEvalAmt", "PrdayCprc"]
         result = self._execute_query("CSPAQ12300",
                                      "CSPAQ12300InBlock1",
                                      "CSPAQ12300OutBlock3",
@@ -289,7 +289,7 @@ class EBest:
             61: 장개시전시간외 종가, 81: 시간외종가, 82:시간외단일가
         :return: dict 주문관련정보
         """
-        in_params = {"AcntNo": self.account, "InpuPwd":self.passwd, "IsuNo":code, "OrdQty":qty,
+        in_params = {"AcntNo": self.account, "InptPwd":self.passwd, "IsuNo":code, "OrdQty":qty,
                      "OrdPrc":price, "BnsTpCode":bns_type, "OrdprcPtnCode":order_type,
                      "MgntrnCode":"000", "LoanDt":"", "OrdCndiTpCode":"0"}
         out_params = ["OrdNo", "OrdTime", "OrdMktCode", "OrdPtnCode", "ShtnIsuNo", "MgempNo",
