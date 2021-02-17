@@ -41,8 +41,8 @@ class EBest:
         XA_session_clinet는 XASession 객체
         :param mode:str - 모의서버는 demo 실서버는 prod로 구분
         """
-        if mode not in ["PROD", "DEMO"]:
-            raise Exception("Need to run_mode(PROD or DEMO)")
+        if mode not in ["PROD", "DEMO", "ACE"]:
+            raise Exception("Need to run_mode(PROD or DEMO or ACE)")
         
         run_mode = "EBEST_"+mode
         config = configparser.ConfigParser()
