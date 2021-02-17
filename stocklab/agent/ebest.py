@@ -378,6 +378,15 @@ class EBest:
 
         return result
 
+    def get_price_n_min_by_code(self, date, code, tick=None):
+        """
+        TR: t8412 주식차트
+        :param date:
+        :param code:
+        :param tick:
+        :return:
+        """
+
     def get_tick_size(self, price):
         """
         호가 단위 조회 메서드

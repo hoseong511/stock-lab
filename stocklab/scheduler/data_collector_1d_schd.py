@@ -65,8 +65,8 @@ if __name__ == '__main__':
     scheduler = BackgroundScheduler()
     scheduler.add_job(func=run_process_collect_code_list, trigger="cron",
                       day_of_week="mon-fri", hour="22", minute="36", id="1")
-    scheduler.add_job(func=run_process_collect_stock_info(), trigger="cron",
-                      day_of_week="mon-fir", hour="19", minute="00", id="2")
+    scheduler.add_job(func=run_process_collect_stock_info, trigger="cron",
+                      day_of_week="mon-fri", hour="19", minute="00", id="2")
     scheduler.start()
 
     while True:

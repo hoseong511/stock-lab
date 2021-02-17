@@ -106,16 +106,16 @@ def trading_scenario(code_list):
                               "stocklab_demo", "order")
         check_sell_order(code)
 
-    if __name__ == '__main__':
-        scheduler = BackgroundScheduler()
-        day = datetime.now() - timedelta(days=4)
-        today = day.strftime("%Y%m%d")
-        code_list = ["180640", "005930", "091990"]
-        print("today:", today)
-        scheduler.add_job(func=run_process_trading_scenario,
-                          trigger="interval", minutes= 5, id="demo",
-                          kwargs={"code_list":code_list})
-        scheduler.start()
-        while True:
-            print("waiting...", datetime.now())
-            time.sleep(1)
+if __name__ == '__main__':
+    scheduler = BackgroundScheduler()
+    day = datetime.now() - timedelta(days=4)
+    today = day.strftime("%Y%m%d")
+    code_list = ["180640", "005930", "091990"]
+    print("today:", today)
+    scheduler.add_job(func=run_process_trading_scenario,
+                      trigger="interval", minutes= 1, id="demo",
+                      kwargs={"code_list":code_list})
+    scheduler.start()
+    while True:
+        print("waiting...", datetime.now())
+        time.sleep(1)
