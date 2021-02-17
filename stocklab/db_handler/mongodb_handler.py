@@ -7,7 +7,7 @@ class MongoDBHandler:
         """
         MongoDBHandler __init__
         config.ini 파일에서 MongoDB 접속 정보를 로딩함.
-        접속정보를 이용해 MongoDB 젒고에 사용할 _client를 생성
+        접속정보를 이용해 MongoDB 접속에 사용할 _client를 생성
         """
         config = configparser.ConfigParser()
         config.read('conf/config.ini')
