@@ -41,6 +41,7 @@ class EBest:
         XA_session_clinet는 XASession 객체
         :param mode:str - 모의서버는 demo 실서버는 prod로 구분
         """
+        print("진입1")
         if mode not in ["PROD", "DEMO", "ACE"]:
             raise Exception("Need to run_mode(PROD or DEMO or ACE)")
         
@@ -59,7 +60,7 @@ class EBest:
 
     def login(self):
         self.xa_session_client.ConnectServer(self.host, self.port)
-        self.xa_session_client.Login(self.user, self.passwd, self.cert_passwd, 0, 0)
+        self.xa_session_client.Login(self.user, self.passwd, self.cert_passwd, 0, False)
         while XASession.login_state == 0:
             pythoncom.PumpWaitingMessages()
 

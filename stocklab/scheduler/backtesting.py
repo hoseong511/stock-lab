@@ -3,7 +3,7 @@ import time
 from datetime import datetime, timedelta
 import inspect
 
-from apscheduler.jobstoresbase import JobLookupError
+from apscheduler.jobstores.base import JobLookupError
 from apscheduler.schedulers.background import BlockingScheduler, BackgroundScheduler
 
 from stocklab.agent.ebest import EBest
@@ -11,6 +11,7 @@ from stocklab.agent.data import Data
 from stocklab.db_handler.mongodb_handler import MongoDBHandler
 
 ebest_ace = EBest("ACE")
+print("진입2")
 ebest_ace.login()
 mongo = MongoDBHandler()
 
