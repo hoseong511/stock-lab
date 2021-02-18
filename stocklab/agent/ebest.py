@@ -81,7 +81,7 @@ class EBest:
         :return: list 결과를 list에 담아 반환
         """
         time.sleep(1)
-        print("current query cnt:", len(self.query_cnt))
+        print("1. current query cnt:", len(self.query_cnt))
         print(res, in_block_name, out_block_name)
         while len(self.query_cnt) >= EBest.QUERY_LIMIT_10MIN:
             time.sleep(1)
@@ -365,6 +365,7 @@ class EBest:
                        "offerho8", "bidho8", "offerrem8", "bidrem8",
                        "offerho9", "bidho9", "offerrem9", "bidrem9",
                        "offerho10", "bidho10", "offerrem10", "bidrem10",
+                        "preoffercha10", "prebidcha10", "offer", "bid",
                        "preoffercha", "prebidcha", "hotime", "yeprice", "yevolume",
                        "yesign", "yechange", "yediff", "tmoffer", "tmbid", "ho_status",
                        "shcode", "uplmtprice", "dnlmtprice", "open", "high", "low"]
