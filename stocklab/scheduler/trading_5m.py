@@ -39,7 +39,7 @@ def check_buy_completed_order(code):
         sell_order = ebest_demo.order_stock(code, "2", str(sell_price), "1", "00")
         print("order_stock", sell_order)
         mongo.update_item({"매수완료.주문번호": buy_order_no},
-                          {"$set":{"매도주문":sell_order[0], "status":"sell_order"}},
+                          {"$set":{"매도주문":sell_order[0], "status":"sell_ordered"}},
                           "stocklab_demo", "order")
 
 def check_buy_order(code):
