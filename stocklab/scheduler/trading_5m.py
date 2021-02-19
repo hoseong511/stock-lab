@@ -51,6 +51,7 @@ def check_buy_order(code):
     order_list = list(mongo.find_items({"$and":[ {"code": code}, {"status": "buy_ordered"}]
                                         },
                                        "stocklab_demo", "order"))
+    print(order_list)
     for order in order_list:
         time.sleep(1)
         code = order["code"]
@@ -85,6 +86,7 @@ def check_sell_order(code):
             print("매도완료", check_result)
 
 def trading_scenario(code_list):
+    print(code_list)
     for code in code_list:
         time.sleep(1)
         print(code)
@@ -113,7 +115,7 @@ if __name__ == '__main__':
     code_list = ["180640", "005930", "091990"]
     print("today:", today)
     scheduler.add_job(func=run_process_trading_scenario,
-                      trigger="interval", minutes= 1, id="demo",
+                      trigger="interval", minutes= 5, id="demo",
                       kwargs={"code_list":code_list})
     scheduler.start()
     while True:
