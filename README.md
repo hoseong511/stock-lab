@@ -21,16 +21,16 @@ npm install @material-ui/core @material-ui/icons --save
 npm install select-react --save
 ```
 Python   
-  pip v21.0.1   
-  ApScheduler v3.7.0   
-  Flask v1.1.2   
-  Flask-Cors v3.0.10   
-  Flask-RESTful v0.3.8   
-  pymongo v3.11.3   
-  requests v2.25.1   
+    pip v21.0.1   
+    ApScheduler v3.7.0   
+    Flask v1.1.2   
+    Flask-Cors v3.0.10   
+    Flask-RESTful v0.3.8   
+    pymongo v3.11.3   
+    requests v2.25.1   
 node v14.15.5   
-  npm v6.14.11   
-  npx v6.14.11   
+    npm v6.14.11   
+    npx v6.14.11   
      
 MongoDB v4.4.3   
    
