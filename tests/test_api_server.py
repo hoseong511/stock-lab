@@ -1,6 +1,6 @@
 import os
 from api_server import app
-import uniitest
+import unittest
 import tempfile
 import json
 import inspect
@@ -38,7 +38,7 @@ class FlaskTestCase(unittest.TestCase):
 
     def test_get_price_with_parameter(self):
         print(inspect.stack()[0][3])
-        rv = self.app.get("/codes/002170/price?start_date=20210219&end_date=20210219")
+        rv = self.app.get("/codes/002170/price?start_date=20210218&end_date=20210218")
         result = rv.get_json()
         print(result["count"])
         assert rv.status_code == 200
