@@ -4,7 +4,6 @@ from flask_cors import CORS
 from flask_restful import reqparse, abort, Api, Resource, fields, marshal_with
 import datetime
 from stocklab.db_handler.mongodb_handler import MongoDBHandler
-import datetime
 
 app = Flask(__name__)
 CORS(app)
@@ -73,7 +72,7 @@ mongodb = MongoDBHandler()
 class CodeList(Resource):
     @marshal_with(code_list_fields)
     def get(self):
-        market = request.args.get('marke' , default = "0", type = str)
+        market = request.args.get('market' , default = "0", type = str)
         if market == "0":
             results = list(mongodb.find_items({}, "stocklab", "code_info"))
         elif market == "1" or market == "2":
@@ -118,13 +117,14 @@ class OrderList(Resource):
         status = request.args.get('status', default="all", type=str)
         if status == 'all':
             result_list = list(mongodb.find_items({}, "stocklab_demo", "order"))
-        elif status in ["buy_ordered", "buy_complted", "sell_ordered", "sell_copleted"]:
+        elif status in ["buy_ordered", "buy_complted", "sell_ordered", "sell_completed"]:
             result_list = list(mongodb.find_items({"status": status}, "stocklab_demo", "order"))
         else:
             return {}, 404
-        return {"count":len(result_list), "order_list":result_list  }, 200
+        print(result_list)
+        return {"count":len(result_list), "order_list": result_list}, 200
 
-api.add_resource(CodeList, "/codes", endpoint="codes")
+api.add_resource(CodeList, "/codes", endpoint= "codes")
 api.add_resource(Code, "/codes/<string:code>", endpoint="code")
 api.add_resource(Price, "/codes/<string:code>/price", endpoint="price")
 api.add_resource(OrderList, "/orders", endpoint="orders")
