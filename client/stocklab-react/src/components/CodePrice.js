@@ -15,6 +15,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import { render } from '@testing-library/react';
 
 const tableIcons={
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref}/>),
@@ -40,5 +41,45 @@ class CodePrice extends Component{
     constructor(props){
         super(props)
         this.state = {
-            columns : [],//"date, "}
-        }}
+            columns : [],//"date, "open", "high", "low", "close"],
+            date:[],
+        }
+    }
+    componentDidMount(){
+
+    }
+    componentDidUpdate(prevProps, prevState, snapshot){
+        if(prevProps.code !== this.props.code){
+            console.log("CodePrice componentDidupdate", this.props.code);
+            let api_url = "http://127.0.0.1:5000/codes/"+this.props.code+"/price";
+            fetch(api_url)
+                .then(res => res.json())
+                .then(date =>{
+                    console.log("price didupdate fetch", data);
+                    this.setState({columns : [{title:"날짜", field:"date"},
+                                            {title:"시가", field:"open"},
+                                            {title:"고가", field:"high"},
+                                            {title:"저가", field:"low"},
+                                            {title:"종가", field:"close"}]})
+                    this.setState({data:data["price_list"]});
+                });
+        }
+    }
+    render(){
+        return(
+            <div>
+                {this.state.data.length > 0?
+                    (<MaterialTable
+                        icons = {tableIcons}
+                        title = {"종목 가격정보"}
+                        data = {this.state.data}
+                        columns = {this.state.columns}
+                    />):(null)
+                }
+            </div>
+        );
+    }
+}
+
+export default CodePrice;
+    
