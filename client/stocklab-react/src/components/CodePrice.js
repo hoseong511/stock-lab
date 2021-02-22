@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, forwardRef } from 'react';
 import MaterialTable from "material-table";
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
@@ -15,25 +15,45 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import { render } from '@testing-library/react';
 
-const tableIcons={
-    Add: forwardRef((props, ref) => <AddBox {...props} ref={ref}/>),
+
+// const tableIcons = {
+//     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+//     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
+//     Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+//     Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
+//     DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+//     Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+//     Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+//     Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+//     FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+//     LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+//     NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+//     PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
+//     ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+//     Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+//     SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
+//     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
+//     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
+//   };
+
+const tableIcons = {
+    Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
     Check: forwardRef((props, ref) => <Check {...props} ref={ref}/>),
     Clear: forwardRef((props, ref) => <Clear {...props} ref={ref}/>),
-    Delete: forwardRef((props, ref) => <Delete {...props} ref={ref}/>),
-    DetailPanel: forwardRef((props, ref) => <DetailPanel {...props} ref={ref}/>),
+    Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref}/>),
+    DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref}/>),
     Edit: forwardRef((props, ref) => <Edit {...props} ref={ref}/>),
-    Export: forwardRef((props, ref) => <Export {...props} ref={ref}/>),
-    Filter: forwardRef((props, ref) => <Filter {...props} ref={ref}/>),
+    Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref}/>),
+    Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref}/>),
     FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref}/>),
     LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref}/>),
-    NextPage: forwardRef((props, ref) => <NextPage {...props} ref={ref}/>),
-    PreviousPage: forwardRef((props, ref) => <PreviousPage {...props} ref={ref}/>),
-    ResetPage: forwardRef((props, ref) => <ResetPage {...props} ref={ref}/>),
+    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref}/>),
+    PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref}/>),
+    ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref}/>),
     Search: forwardRef((props, ref) => <Search {...props} ref={ref}/>),
-    SortArrow: forwardRef((props, ref) => <SortArrow {...props} ref={ref}/>),
-    ThirdStateCheck: forwardRef((props, ref) => <ThirdStateCheck {...props} ref={ref}/>),
+    SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref}/>),
+    ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref}/>),
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref}/>)
     };
 
@@ -54,7 +74,7 @@ class CodePrice extends Component{
             let api_url = "http://127.0.0.1:5000/codes/"+this.props.code+"/price";
             fetch(api_url)
                 .then(res => res.json())
-                .then(date =>{
+                .then(data =>{
                     console.log("price didupdate fetch", data);
                     this.setState({columns : [{title:"날짜", field:"date"},
                                             {title:"시가", field:"open"},
