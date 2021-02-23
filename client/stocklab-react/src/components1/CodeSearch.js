@@ -11,7 +11,7 @@ class CodeSearch extends Component{
         super(props);
         console.log("CondeSearch constructor");
         let api_url = "http://127.0.0.1:5000/codes";
-        this.state = { 
+        this.state = {
             selectedOption:'',
             options : [],
             filteredOptions : [],
@@ -48,7 +48,7 @@ class CodeSearch extends Component{
                 data["code_list"].map(function(item){
                     item["value"] = item["code"]
                     item["label"] = item["name"] + "(" + item["code"] +")"
-                    item["market"] = item["market"] 
+                    item["market"] = item["market"]
                     item["is_etf"] = item["is_etf"]
                     item["is_spac"] = item["is_spac"]
                 });

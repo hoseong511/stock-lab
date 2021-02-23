@@ -22,11 +22,14 @@ const styles = {
 class CodeInfo extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            selectedCode:"",
+        }
     }
     componentDidMount(){
 
     }
-    componentDidUpdate(prevProps, prevState, snapshot){
+    componentDidUpdate(prevProps, prevState){
 
     }
     handleSelectedCode = (selectedCode)=>{
@@ -45,6 +48,7 @@ class CodeInfo extends Component {
                             <Grid key={"codePrice"} item>
                                 <CodePrice code={this.state.selectedCode}/>
                             </Grid>
+
                         </Grid>
                     </Grid>
                 </div>

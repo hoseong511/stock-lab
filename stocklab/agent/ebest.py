@@ -31,8 +31,8 @@ class XASession:
         XASession.login_state = 0
 
 class EBest:
-    QUERY_LIMIT_10MIN = 200
-    LIMIT_SECONDS = 600 #10min
+    QUERY_LIMIT_10MIN = 5
+    LIMIT_SECONDS = 15 #10min
 
     def __init__(self, mode=None):
         """
@@ -83,11 +83,18 @@ class EBest:
         time.sleep(1)
         print("1. current query cnt:", len(self.query_cnt))
         print(res, in_block_name, out_block_name)
+        # while len(self.query_cnt) >= EBest.QUERY_LIMIT_10MIN:
+        #     time.sleep(1)
+        #     print("waiting for execute query... current query cnt:", len(self.query_cnt))
+        #     self.query_cnt = list(
+        #         filter(lambda x: (datetime.today() - x).total_seconds() < EBest.LIMIT_SECONDS, self.query_cnt))
+        #     print(len(self.query_cnt))
         while len(self.query_cnt) >= EBest.QUERY_LIMIT_10MIN:
             time.sleep(1)
             print("waiting for execute query... current query cnt:", len(self.query_cnt))
-            self.query_cnt = list(filter(lambda x: (datetime.today() - x).total_seconds() < EBest.LIMIT_SECONDS, self.query_cnt))
-
+            self.query_cnt = list(
+                filter(lambda x: (datetime.today() - x).total_seconds() < EBest.LIMIT_SECONDS, self.query_cnt))
+            print(len(self.query_cnt))
         xa_query = win32com.client.DispatchWithEvents("XA_DataSet.XAQuery", XAQuery)
         xa_query.LoadFromResFile(XAQuery.RES_PATH + res +".res")
 
@@ -158,6 +165,7 @@ class EBest:
         :param cnt: str 이전 데이터 조회 범위(일단위)
         :return: result:list 종목의 최근 가격 정보
         """
+        print(cnt, code)
         in_params = {"shcode":code, "dwmcode": "1", "date": "", "idx":"", "cnt":cnt}
         out_params = ['date', 'open', 'high', 'low', 'close', 'sign',
                       'change', 'diff', 'volume', 'diff_vol', 'chdegree',

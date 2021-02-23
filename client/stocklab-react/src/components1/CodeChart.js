@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 //import MUIDataTable from "mui-datatables";
 //import Chart from 'react-google-charts';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, } from 'recharts';
- 
+
 
 class CodeChart extends Component {
     constructor(props){
@@ -24,7 +24,7 @@ class CodeChart extends Component {
                 .then(res => res.json())
                 .then(data =>{
                     this.setState({data: data["price_list"]});
-                }); 
+                });
         }
     }
 
@@ -34,7 +34,7 @@ class CodeChart extends Component {
             <div>
             {this.state.data.length >0 ?
                 (
-                    <LineChart width={500} height={300} data={this.state.data} 
+                    <LineChart width={500} height={300} data={this.state.data}
                         margin={{ top: 5, right: 30, left: 20, bottom: 5, }} >
                     <XAxis dataKey="date" />
                     <YAxis/>

@@ -1,6 +1,7 @@
 # pip install Flask Flask-Restful
 from flask import Flask, request
 from flask_cors import CORS
+from flask_restx import Api, Resource
 from flask_restful import reqparse, abort, Api, Resource, fields, marshal_with
 import datetime
 from stocklab.db_handler.mongodb_handler import MongoDBHandler
@@ -9,7 +10,9 @@ from stocklab.agent.ebest import EBest
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
-
+ebest = EBest("DEMO")
+ebest.login()
+test_api_getList = ebest.get_code_list("ALL")
 
 
 code_hname_to_eng = {
@@ -55,22 +58,27 @@ price_hname_to_eng = {
 }
 
 price_fields = {
-    "date": fields.Integer,
+    "date": fields.String,
     "start": fields.Integer,
-    "close": fields.Integer,
-    "open": fields.Integer,
-    "high": fields.Integer,
-    "low": fields.Integer,
-    "diff": fields.Float,
-    "diff_type": fields.Integer
+    "close": fields.String,
+    "open": fields.String,
+    "high": fields.String,
+    "low": fields.String,
+    "diff": fields.String,
+    "diff_type": fields.String
 }
 
 price_fields = {
     "count": fields.Integer,
-    "price_list": fields.List(fields.Nested(price_fields)),
+    "price_list": fields.List(fields.Nested(price_fields))
 }
-
+#
 mongodb = MongoDBHandler()
+#
+@app.route('/hello')
+def hello():
+    mongodb.insert_items(test_api_getList, "stocklab", "code_info")
+    return "hello"
 
 class CodeList(Resource):
     @marshal_with(code_list_fields)
@@ -84,7 +92,7 @@ class CodeList(Resource):
         elif market == "1" or market == "2":
             results = list(mongodb.find_items({"시장구분":market}, "stocklab", "code_info"))
         result_list =[]
-        for item in results:
+        for item in test_api_getList:
             code_info = {}
             code_info = { code_hname_to_eng[field]: item[field] for field in item.keys() if field in code_hname_to_eng }
             result_list.append(code_info)
@@ -93,7 +101,7 @@ class CodeList(Resource):
         #     code_info = { code_hname_to_eng[field]: item[field] for field in item.keys() if field in code_hname_to_eng }
         #     result_list.append(code_info)
         return {"code_list" : result_list, "count" : len(result_list)}, 200
-
+#
 class Code(Resource):
     @marshal_with(code_fields)
     def get(self, code):
@@ -106,39 +114,38 @@ class Code(Resource):
 
         return code_info
 
-class Price(Resource):
-    @marshal_with(price_fields)
-    def get(self, code):
-        today = datetime.datetime.now().strftime("%Y%m%d")
-        default_start_date = datetime.datetime.now() - datetime.timedelta(days=7)
-        start_date = request.args.get('start_date', default= default_start_date.strftime("%Y%m%d"), type=str)
-        end_date = request.args.get('end_date', default=today, type=str)
-        results= list(mongodb.find_items({"code":code, "날짜": {"$gte": start_date, "$lte": end_date}}, "stocklab", "price_info"))
-        result_object = {}
-        price_info_list=[]
-        for item in results:
-            price_info = { price_hname_to_eng[field]: item[field] for field in item.keys() if field in price_hname_to_eng}
-            price_info_list.append(price_info)
-        result_object["count"] = len(price_info_list)
-        result_object["price_list"] = price_info_list
-        return result_object, 200
-
-class OrderList(Resource):
-    def get(self):
-        status = request.args.get('status', default="all", type=str)
-        if status == 'all':
-            result_list = list(mongodb.find_items({}, "stocklab_demo", "order"))
-        elif status in ["buy_ordered", "buy_complted", "sell_ordered", "sell_completed"]:
-            result_list = list(mongodb.find_items({"status": status}, "stocklab_demo", "order"))
-        else:
-            return {}, 404
-        print(result_list)
-        return {"count":len(result_list), "order_list": result_list}, 200
-
+# class Price(Resource):
+#     @marshal_with(price_fields)
+#     def get(self, code):
+#         today = datetime.datetime.now().strftime("%Y%m%d")
+#         default_start_date = datetime.datetime.now() - datetime.timedelta(days=7)
+#         start_date = request.args.get('start_date', default= today, type=str)
+#         end_date = request.args.get('end_date', default=today, type=str)
+#         results= list(mongodb.find_items({"code":code, "날짜": {"$gte": start_date, "$lte": end_date}}, "stocklab", "price_info"))
+#         result_object = {}
+#         price_info_list=[]
+#         for item in results:
+#             price_info = { price_hname_to_eng[field]: item[field] for field in item.keys() if field in price_hname_to_eng}
+#             result_object["price_list"] = price_info_list
+#             result_object["count"] = len(price_info_list)
+#             return result_object, 200
+#
+# class OrderList(Resource):
+#     def get(self):
+#         status = request.args.get('status', default="all", type=str)
+#         if status == 'all':
+#             result_list = list(mongodb.find_items({}, "stocklab_demo", "order"))
+#         elif status in ["buy_ordered", "buy_complted", "sell_ordered", "sell_completed"]:
+#             result_list = list(mongodb.find_items({"status": status}, "stocklab_demo", "order"))
+#         else:
+#             return {}, 404
+#         print(result_list)
+#         return {"count":len(result_list), "order_list": result_list}, 200
+#
 api.add_resource(CodeList, "/codes", endpoint= "codes")
 api.add_resource(Code, "/codes/<string:code>", endpoint="code")
 api.add_resource(Price, "/codes/<string:code>/price", endpoint="price")
-api.add_resource(OrderList, "/orders", endpoint="orders")
+# api.add_resource(OrderList, "/orders", endpoint="orders")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=81)
