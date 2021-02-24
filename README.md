@@ -3,7 +3,6 @@
 2-Tier
 DB->aws, Stock Service-> mylaptop
 
-공공데이터 API (한국예탁결제원_기업정보서비스).  
 EBEST API.  
 MongoDB.  
 React.  
