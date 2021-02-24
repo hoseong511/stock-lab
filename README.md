@@ -1,5 +1,6 @@
 # stock-lab
-<img src="https://user-images.githubusercontent.com/62678380/109017633-b4abed80-76fa-11eb-9bec-53c35811cccd.png" width="500">
+<p align="center"><img src="https://user-images.githubusercontent.com/62678380/109017633-b4abed80-76fa-11eb-9bec-53c35811cccd.png" width="500"></p>
+
 
 2-Tier.  
 DB->aws, Stock Service-> mylaptop
