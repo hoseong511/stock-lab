@@ -1,6 +1,6 @@
 # stock-lab
 
-2-Tier
+2-Tier.  
 DB->aws, Stock Service-> mylaptop
 
 EBEST API.  
