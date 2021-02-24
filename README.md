@@ -5,7 +5,7 @@
 2-Tier.  
 DB->aws, Stock Service-> mylaptop
 
-EBEST API.  
+Xing API.  
 MongoDB.  
 React.  
 
