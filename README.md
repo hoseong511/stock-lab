@@ -21,7 +21,7 @@ npm install @material-ui/core @material-ui/icons --save
 npm install react-select --save
 npm install npm install material-table --save
 ```
-Python   
+Python v3.8  
     pip v21.0.1   
     ApScheduler v3.7.0   
     Flask v1.1.2   
