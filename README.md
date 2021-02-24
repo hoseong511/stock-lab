@@ -1,4 +1,5 @@
 # stock-lab
+![그림1](https://user-images.githubusercontent.com/62678380/109017633-b4abed80-76fa-11eb-9bec-53c35811cccd.png)
 
 2-Tier.  
 DB->aws, Stock Service-> mylaptop
