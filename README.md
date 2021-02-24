@@ -1,11 +1,12 @@
 # stock-lab
 
+2-Tier
 DB->aws, Stock Service-> mylaptop
 
-공공데이터 API (한국예탁결제원_기업정보서비스)
-EBEST API
-MongoDB
-React
+공공데이터 API (한국예탁결제원_기업정보서비스).  
+EBEST API.  
+MongoDB.  
+React.  
 
 
 ~~**백테스팅 시 xingACE를 실행, 트레이딩 모듈 작동 시 DevCenter를실행**~~.  
@@ -18,7 +19,8 @@ pip install requests
 pip install Flask Flask-Cors Flask-Restful
 npm install npx -g
 npm install @material-ui/core @material-ui/icons --save
-npm install select-react --save
+npm install react-select --save
+npm install npm install material-table --save
 ```
 Python   
     pip v21.0.1   
