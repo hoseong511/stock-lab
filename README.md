@@ -1,5 +1,5 @@
 # stock-lab
-<p align="center"><img src="https://user-images.githubusercontent.com/62678380/109017633-b4abed80-76fa-11eb-9bec-53c35811cccd.png" width="500"></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/62678380/109017633-b4abed80-76fa-11eb-9bec-53c35811cccd.png" width="300"></p>
 
 
 2-Tier.  
