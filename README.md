@@ -5,9 +5,11 @@
 2-Tier.  
 DB->aws, Stock Service-> mylaptop
 
-Xing API.  
-MongoDB.  
-React.  
+React   
+myAPI   
+Xing API   
+MongoDB   
+
 
 
 ~~**백테스팅 시 xingACE를 실행, 트레이딩 모듈 작동 시 DevCenter를실행**~~.  
